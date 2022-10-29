@@ -1,0 +1,25 @@
+package pattern;
+
+public class patternBottomDiamond {
+	public static void main(String[] args) {
+		for(int i=7; i>=1; i--)
+	     {
+	         for(int j=i; j<=7; j++)
+	         {
+	             System.out.print("*");
+	         } 
+	         for(int k=1; k<=(2*i)-1; k++)
+	         {
+	             System.out.print(" ");
+	         } 
+	         for(int j=i; j<=7; j++)
+	         {
+	             System.out.print("*");
+	         }
+	         if(i==1||i==2) {
+	        	 System.out.print("*");
+	         }
+	         System.out.println();
+	     }
+	}
+}
