@@ -1,11 +1,8 @@
-package helloworld;
-
 import java.util.Arrays;
+import java.util.Scanner;
 
-public class helloworld {
+public class ArraysCollectionBinarySearch {
 
-	
-	// Driver Code
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
@@ -38,9 +35,12 @@ public class helloworld {
 			System.out.print(elem + " ");
 		}
 		System.out.println();
-		int res=Arrays.binarySearch(arr, 30);//inbuilt bs method with parameter
-		System.out.println(res);
-		
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Enter the key");
+		int n=sc.nextInt();
+		int res=Arrays.binarySearch(arr, n);//inbuilt bs method with parameter
+		System.out.println("Keys found at index"+res);
 		
 	}
+
 }
