@@ -1,13 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="arr"/>
+		<item key="selection" value="guessGame"/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
+			<item value="updatedGusserGame"/>
+			<item value="guessNum"/>
+			<item value="numFromPlayer3"/>
+			<item value="numFromPlayer2"/>
+			<item value="numFromPlayer1"/>
+			<item value="numFromGusser"/>
+			<item value="noOfPlayers"/>
 			<item value="input"/>
 			<item value="space"/>
 			<item value="half"/>
@@ -16,6 +23,13 @@
 			<item value="height"/>
 		</list>
 		<list key="replacehistory">
+			<item value="guessGame"/>
+			<item value="guessStr"/>
+			<item value="strFromPlayer3"/>
+			<item value="strFromPlayer2"/>
+			<item value="strFromPlayer1"/>
+			<item value="strFromGusser"/>
+			<item value="numOfPlayer"/>
 			<item value="arr"/>
 			<item value="sp"/>
 			<item value="mid"/>
