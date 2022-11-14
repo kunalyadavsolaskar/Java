@@ -30,17 +30,20 @@ public class helloworld {
 //			System.out.print(elem + " ");
 //		}
 //		System.out.println();
+		int x=123;
+		System.out.println(x%10);
+		System.out.println(x/10);
 		
-		int[] arr= {20,30,50,10,25,60};
-		Arrays.sort(arr);//Sort the element
-		for(int elem:arr)
-		{
-			System.out.print(elem + " ");
-		}
-		System.out.println();
-		int res=Arrays.binarySearch(arr, 30);//inbuilt bs method with parameter
-		System.out.println(res);
-		
-		
+//		int[] arr= {20,30,50,10,25,60};
+//		Arrays.sort(arr);//Sort the element
+//		for(int elem:arr)
+//		{
+//			System.out.print(elem + " ");
+//		}
+//		System.out.println();
+//		int res=Arrays.binarySearch(arr, 30);//inbuilt bs method with parameter
+//		System.out.println(res);
+//		
+//		
 	}
 }
