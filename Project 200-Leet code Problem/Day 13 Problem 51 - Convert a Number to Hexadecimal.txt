@@ -1,0 +1,51 @@
+/*Given an integer num, return a string representing its hexadecimal representation. For negative integers, two’s complement method is used.
+
+All the letters in the answer string should be lowercase characters, and there should not be any leading zeros in the answer except for the zero itself.
+
+Note: You are not allowed to use any built-in library method to directly solve this problem.
+
+ 
+
+Example 1:
+
+Input: num = 26
+Output: "1a"*/
+
+public class Solution {
+    public String toHex(int num) {
+        if(num<0){
+            return helper((long)num);
+        }    
+        if(num<16){
+            if(num==15) return "f";
+            else if(num==14) return "e";
+            else if(num==13) return "d";
+            else if(num==12) return "c";
+            else if(num==11) return "b";
+            else if(num==10) return "a";
+            else{
+                return num+"";
+            }
+        }
+        return toHex(num/16)+toHex(num%16);
+    }
+    
+    public String helper(long n){
+        if(n<0){
+            long max = (long)Math.pow(2,32);
+            n+=max;
+        }
+        if(n<16){
+            if(n==15) return "f";
+            else if(n==14) return "e";
+            else if(n==13) return "d";
+            else if(n==12) return "c";
+            else if(n==11) return "b";
+            else if(n==10) return "a";
+            else{
+                return n+"";
+            }
+        }
+        return helper(n/16)+helper(n%16);
+    }
+}
