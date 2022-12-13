@@ -1,0 +1,30 @@
+/*An array nums of length n is beautiful if:
+
+nums is a permutation of the integers in the range [1, n].
+For every 0 <= i < j < n, there is no index k with i < k < j where 2 * nums[k] == nums[i] + nums[j].
+Given the integer n, return any beautiful array nums of length n. There will be at least one valid answer for the given n.
+
+ 
+
+Example 1:
+
+Input: n = 4
+Output: [2,1,4,3]*/
+
+class Solution {
+      public int[] beautifulArray(int N) {
+        int[] cache = new int[2*N], ret = new int[N];
+        cache[0] = 1;
+        
+        int l = 1;
+        while(l < N) {
+            for(int i = 0; i < l; i++) cache[i] *= 2;
+            for(int i = l; i < l * 2; i++) cache[i] = cache[i-l] - 1;
+            l *= 2;
+        }
+        
+        int j = 0;
+        for(int i = 0; i < l; i++) if(cache[i] <= N) ret[j++] = cache[i];
+        return ret;
+    }
+}

@@ -1,0 +1,87 @@
+/*You are given an n x n binary matrix grid where 1 represents land and 0 represents water.
+
+An island is a 4-directionally connected group of 1's not connected to any other 1's. There are exactly two islands in grid.
+
+You may change 0's to 1's to connect the two islands to form one island.
+
+Return the smallest number of 0's you must flip to connect the two islands.
+
+ 
+
+Example 1:
+
+Input: grid = [[0,1],[1,0]]
+Output: 1*/
+
+class Solution {
+    int[][] dirs = {{-1, 0}, {1, 0}, {0, 1}, {0, -1}};
+    int count[] = new int[3];
+    public int shortestBridge(int[][] A) {
+        int n = A.length, m = A[0].length;
+        int[][] mark = new int[n][m];
+        int color = 1;
+        boolean changeColor = true;
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (A[i][j] == 1 && mark[i][j] == 0) {
+                    color = changeColor ? 1 : 2;
+                    mark[i][j] = color;
+                    markIsland(A, mark, color, i, j);
+                    changeColor = !changeColor;
+                }
+            }
+        }
+        // find the boundary for color 1 and color 2, the path is the shorestes distance amonge these boundary
+        List<int[]> position1 = getPosition(mark, 1);
+        List<int[]> position2 = getPosition(mark, 2);
+        int shortestPath = Integer.MAX_VALUE;
+        for (int[] d1: position1) {
+            for (int[] d2: position2) {
+                shortestPath = Math.min(shortestPath, Math.abs(d1[0] - d2[0]) + Math.abs(d1[1] - d2[1]) - 1);
+            }
+        }
+        return shortestPath;
+    }
+    
+    private List<int[]> getPosition(int[][] mark, int color) {
+        List<int[]> position = new ArrayList<>();
+        int n = mark.length, m = mark[0].length;
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (mark[i][j] == color && isBoundary(mark, i, j)) {
+                    position.add(new int[]{i, j});
+                }
+            }
+        }
+        return position;
+    }
+    
+    private void markIsland(int[][] A, int[][] mark, int color, int i, int j) {
+        for (int[] dir: dirs) {
+            int ni = i + dir[0];
+            int nj = j + dir[1];
+            if (ni < 0 || nj < 0 || ni >= A.length || nj >= A[0].length || 
+                mark[ni][nj] != 0 || A[ni][nj] == 0) {
+                continue;
+            }
+            mark[ni][nj] = color;
+            count[color]++;
+            //System.out.println(ni + " " + nj);
+            markIsland(A, mark, color, ni, nj);
+        }
+    }
+    
+    private boolean isBoundary(int[][] A, int i, int j) {
+        for (int[] dir: dirs) {
+            int ni = i + dir[0];
+            int nj = j + dir[1];
+            if (ni < 0 || nj < 0 || ni >= A.length || nj >= A[0].length) {
+                continue;
+            }
+            if (A[ni][nj] == 0) {
+                return true;
+            }
+        }
+        return false;
+    }
+}
