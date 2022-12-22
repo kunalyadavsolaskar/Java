@@ -1,0 +1,47 @@
+class Solution {
+    public int largestOverlap(int[][] A, int[][] B) {
+        int N = A.length;
+        int[] as = generate(A, N);
+        int[] bs = generate(B, N);
+        int max = 0;
+        for (int i = -N + 1; i < N; i++) {
+            for (int j = -N + 1; j < N; j++) {
+                int[] newRows = translate(as, i, j, N);
+                max = Math.max(max, compare(bs, newRows));
+            }
+        }
+        return max;
+    }
+    private int compare(int[] a, int[] b) {
+        int result = 0;
+        for (int i = 0; i < a.length; i++) {
+            result += Integer.bitCount(a[i] & b[i]);
+        }
+        return result;
+    }
+    private int[] generate(int[][] grid, int N) {
+        int[] result = new int[N];
+        for (int i = 0; i < N; i++) {
+            int row = 0;
+            for (int j = 0; j < N; j++) {
+                row = (row << 1) | grid[i][j];
+            }
+            result[i] = row;
+        }
+        return result;
+    }
+    private int[] translate(int[] rows, int i, int j, int N) {
+        int[] result = new int[N];
+        for (int index = 0; index < N; index++) {
+            if (index - i >= 0 && index - i < N) {
+                result[index] = rows[index - i];
+                if (j > 0) {
+                    result[index] = (result[index] >> j);
+                } else {
+                    result[index] = (result[index] << -j);
+                }
+            }
+        }
+        return result;
+    }
+}
