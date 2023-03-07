@@ -1,0 +1,9 @@
+package ai.neuron.util;
+
+
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class Config {
+
+}
