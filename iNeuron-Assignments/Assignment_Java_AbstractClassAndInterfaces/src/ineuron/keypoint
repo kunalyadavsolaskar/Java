@@ -1,0 +1,17 @@
+Key points about abstract classes:
+
+Abstract classes can have both abstract and non-abstract methods.
+Abstract classes cannot be instantiated; they can only be subclassed.
+Abstract methods are declared without an implementation and must be overridden in the concrete subclasses.
+Abstract classes can have constructor definitions that are invoked when a concrete subclass object is created.
+Abstract classes can have instance variables and non-final methods.
+Subclasses can extend only one abstract class.
+
+Key points about abstract classes:
+
+Abstract classes can have both abstract and non-abstract methods.
+Abstract classes cannot be instantiated; they can only be subclassed.
+Abstract methods are declared without an implementation and must be overridden in the concrete subclasses.
+Abstract classes can have constructor definitions that are invoked when a concrete subclass object is created.
+Abstract classes can have instance variables and non-final methods.
+Subclasses can extend only one abstract class.
