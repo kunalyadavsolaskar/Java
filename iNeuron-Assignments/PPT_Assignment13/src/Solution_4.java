@@ -1,37 +1,90 @@
-public class Solution_4 {
-    public static int findDuplicate(int[] nums) {
-        int left = 1;
-        int right = nums.length - 1;
-        
-        while (left < right) {
-            int mid = left + (right - left) / 2;
-            int count = countOccurrences(nums, mid);
-            
-            if (count > mid) {
-                right = mid;
-            } else {
-                left = mid + 1;
-            }
-        }
-        
-        return left;
+class Node {
+    int data;
+    Node next;
+
+    public Node(int data) {
+        this.data = data;
+        this.next = null;
     }
-    
-    private static int countOccurrences(int[] nums, int target) {
+}
+
+class LinkedList {
+    Node head;
+
+    public LinkedList() {
+        this.head = null;
+    }
+
+    public void insert(int data) {
+        Node newNode = new Node(data);
+        if (head == null) {
+            head = newNode;
+        } else {
+            Node current = head;
+            while (current.next != null) {
+                current = current.next;
+            }
+            current.next = newNode;
+        }
+    }
+
+    public Node reverseAlternateKNodes(Node head, int k) {
+        Node current = head;
+        Node next = null;
+        Node prev = null;
         int count = 0;
-        
-        for (int num : nums) {
-            if (num <= target) {
-                count++;
-            }
+
+        // Reverse the first k nodes
+        while (count < k && current != null) {
+            next = current.next;
+            current.next = prev;
+            prev = current;
+            current = next;
+            count++;
         }
-        
-        return count;
+
+        // Skip the next k nodes
+        count = 0;
+        while (count < k && current != null) {
+            prev = current;
+            current = current.next;
+            count++;
+        }
+
+        // Recursively reverse alternate k nodes
+        if (current != null) {
+            prev.next = reverseAlternateKNodes(current, k);
+        }
+
+        return prev;
     }
-    
+
+    public void display(Node head) {
+        Node current = head;
+        while (current != null) {
+            System.out.print(current.data + " ");
+            current = current.next;
+        }
+        System.out.println();
+    }
+}
+
+public class Solution_4 {
     public static void main(String[] args) {
-        int[] nums = {1, 3, 4, 2, 2};
-        int repeatedNumber = findDuplicate(nums);
-        System.out.println("Repeated number: " + repeatedNumber);
+        LinkedList list = new LinkedList();
+        list.insert(1);
+        list.insert(2);
+        list.insert(3);
+        list.insert(4);
+        list.insert(5);
+        list.insert(6);
+        list.insert(7);
+        list.insert(8);
+        list.insert(9);
+
+        int k = 3;
+
+        list.head = list.reverseAlternateKNodes(list.head, k);
+        list.display(list.head);
     }
 }

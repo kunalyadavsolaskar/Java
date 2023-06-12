@@ -1,28 +1,91 @@
-public class Solution_1 {
-    public static int mySqrt(int x) {
-        if (x == 0)
-            return 0;
+class Node {
+    int data;
+    Node next;
 
-        int left = 1;
-        int right = x;
+    public Node(int data) {
+        this.data = data;
+        this.next = null;
+    }
+}
 
-        while (left <= right) {
-            int mid = left + (right - left) / 2;
+class LinkedList {
+    Node head;
 
-            if (mid <= x / mid && (mid + 1) > x / (mid + 1))
-                return mid;
-            else if (mid > x / mid)
-                right = mid - 1;
-            else
-                left = mid + 1;
-        }
-
-        return -1; // This line should not be reached
+    public LinkedList() {
+        this.head = null;
     }
 
+    public void insert(int data) {
+        Node newNode = new Node(data);
+        if (head == null) {
+            head = newNode;
+        } else {
+            Node current = head;
+            while (current.next != null) {
+                current = current.next;
+            }
+            current.next = newNode;
+        }
+    }
+
+    public static LinkedList createNewList(LinkedList list1, LinkedList list2) {
+        LinkedList newList = new LinkedList();
+
+        Node ptr1 = list1.head;
+        Node ptr2 = list2.head;
+
+        while (ptr1 != null && ptr2 != null) {
+            int value1 = ptr1.data;
+            int value2 = ptr2.data;
+
+            if (value1 >= value2) {
+                newList.insert(value1);
+            } else {
+                newList.insert(value2);
+            }
+
+            ptr1 = ptr1.next;
+            ptr2 = ptr2.next;
+        }
+
+        while (ptr1 != null) {
+            newList.insert(ptr1.data);
+            ptr1 = ptr1.next;
+        }
+
+        while (ptr2 != null) {
+            newList.insert(ptr2.data);
+            ptr2 = ptr2.next;
+        }
+
+        return newList;
+    }
+
+    public void display() {
+        Node current = head;
+        while (current != null) {
+            System.out.print(current.data + " ");
+            current = current.next;
+        }
+        System.out.println();
+    }
+}
+
+public class Solution_1 {
     public static void main(String[] args) {
-        int x = 8;
-        int result = mySqrt(x);
-        System.out.println("Square root of " + x + " is: " + result);
+        LinkedList list1 = new LinkedList();
+        list1.insert(5);
+        list1.insert(2);
+        list1.insert(3);
+        list1.insert(8);
+
+        LinkedList list2 = new LinkedList();
+        list2.insert(1);
+        list2.insert(7);
+        list2.insert(4);
+        list2.insert(5);
+
+        LinkedList newList = LinkedList.createNewList(list1, list2);
+        newList.display();
     }
 }

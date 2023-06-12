@@ -1,46 +1,76 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+class Node {
+    int data;
+    Node prev;
+    Node next;
 
-public class Solution_8 {
-    public static int[] intersect(int[] nums1, int[] nums2) {
-        Arrays.sort(nums1);
-        Arrays.sort(nums2);
+    public Node(int data) {
+        this.data = data;
+        this.prev = null;
+        this.next = null;
+    }
+}
 
-        List<Integer> intersection = new ArrayList<>();
+class DoublyLinkedList {
+    Node head;
+    Node tail;
 
-        int i = 0;
-        int j = 0;
+    void deleteNodeAtPosition(int position) {
+        if (position < 1)
+            return;
 
-        while (i < nums1.length && j < nums2.length) {
-            if (nums1[i] == nums2[j]) {
-                intersection.add(nums1[i]);
-                i++;
-                j++;
-            } else if (nums1[i] < nums2[j]) {
-                i++;
-            } else {
-                j++;
-            }
+        Node current = head;
+        int currentPosition = 1;
+
+        while (current != null && currentPosition < position) {
+            current = current.next;
+            currentPosition++;
         }
 
-        int[] result = new int[intersection.size()];
-        for (int k = 0; k < intersection.size(); k++) {
-            result[k] = intersection.get(k);
-        }
+        if (current == null)
+            return;
 
-        return result;
+        if (current.prev != null)
+            current.prev.next = current.next;
+        else
+            head = current.next;
+
+        if (current.next != null)
+            current.next.prev = current.prev;
+        else
+            tail = current.prev;
+
+        current.prev = null;
+        current.next = null;
     }
 
-    public static void main(String[] args) {
-        int[] nums1 = { 1, 2, 2, 1 };
-        int[] nums2 = { 2, 2 };
-        int[] result = intersect(nums1, nums2);
-        System.out.println(Arrays.toString(result));
+    void display() {
+        Node current = head;
+        while (current != null) {
+            System.out.print(current.data + " ");
+            current = current.next;
+        }
+        System.out.println();
+    }
+}
 
-        int[] nums3 = { 4, 9, 5 };
-        int[] nums4 = { 9, 4, 9, 8, 4 };
-        int[] result2 = intersect(nums3, nums4);
-        System.out.println(Arrays.toString(result2));
+public class Solution_8 {
+    public static void main(String[] args) {
+        DoublyLinkedList list = new DoublyLinkedList();
+        list.head = new Node(1);
+        list.head.next = new Node(5);
+        list.head.next.prev = list.head;
+        list.head.next.next = new Node(2);
+        list.head.next.next.prev = list.head.next;
+        list.head.next.next.next = new Node(9);
+        list.head.next.next.next.prev = list.head.next.next;
+
+        System.out.println("Original Doubly Linked List:");
+        list.display();
+
+        int position = 1;
+        list.deleteNodeAtPosition(position);
+
+        System.out.println("Doubly Linked List after deleting node at position " + position + ":");
+        list.display();
     }
 }

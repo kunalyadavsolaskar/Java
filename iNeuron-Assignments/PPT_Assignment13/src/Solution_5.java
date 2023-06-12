@@ -1,52 +1,87 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+class Node {
+    int data;
+    Node next;
+
+    public Node(int data) {
+        this.data = data;
+        this.next = null;
+    }
+}
+
+class LinkedList {
+    Node head;
+
+    public LinkedList() {
+        this.head = null;
+    }
+
+    public void insert(int data) {
+        Node newNode = new Node(data);
+        if (head == null) {
+            head = newNode;
+        } else {
+            Node current = head;
+            while (current.next != null) {
+                current = current.next;
+            }
+            current.next = newNode;
+        }
+    }
+
+    public Node deleteLastOccurrence(Node head, int key) {
+        Node lastOccurrence = null;
+        Node prevLastOccurrence = null;
+        Node current = head;
+        Node prev = null;
+
+        // Find the last occurrence of the key and its previous node
+        while (current != null) {
+            if (current.data == key) {
+                lastOccurrence = current;
+                prevLastOccurrence = prev;
+            }
+            prev = current;
+            current = current.next;
+        }
+
+        // If the key is not found, return the original list
+        if (lastOccurrence == null) {
+            return head;
+        }
+
+        // If last occurrence is the head, update the head
+        if (lastOccurrence == head) {
+            head = head.next;
+        } else {
+            prevLastOccurrence.next = lastOccurrence.next;
+        }
+
+        return head;
+    }
+
+    public void display(Node head) {
+        Node current = head;
+        while (current != null) {
+            System.out.print(current.data + " ");
+            current = current.next;
+        }
+        System.out.println();
+    }
+}
 
 public class Solution_5 {
-    public static int[] intersection(int[] nums1, int[] nums2) {
-        Arrays.sort(nums1);
-        Arrays.sort(nums2);
-        
-        List<Integer> intersection = new ArrayList<>();
-        
-        for (int num : nums1) {
-            if (binarySearch(nums2, num) && !intersection.contains(num)) {
-                intersection.add(num);
-            }
-        }
-        
-        int[] result = new int[intersection.size()];
-        for (int i = 0; i < intersection.size(); i++) {
-            result[i] = intersection.get(i);
-        }
-        
-        return result;
-    }
-    
-    private static boolean binarySearch(int[] nums, int target) {
-        int left = 0;
-        int right = nums.length - 1;
-        
-        while (left <= right) {
-            int mid = left + (right - left) / 2;
-            
-            if (nums[mid] == target) {
-                return true;
-            } else if (nums[mid] < target) {
-                left = mid + 1;
-            } else {
-                right = mid - 1;
-            }
-        }
-        
-        return false;
-    }
-    
     public static void main(String[] args) {
-        int[] nums1 = {1, 2, 2, 1};
-        int[] nums2 = {2, 2};
-        
-        int[] result = intersection(nums1, nums2);
-        System.out.println("Intersection: " + Arrays.toString(result));
+        LinkedList list = new LinkedList();
+        list.insert(1);
+        list.insert(2);
+        list.insert(3);
+        list.insert(5);
+        list.insert(2);
+        list.insert(10);
+
+        int key = 2;
+
+        list.head = list.deleteLastOccurrence(list.head, key);
+        list.display(list.head);
     }
 }
