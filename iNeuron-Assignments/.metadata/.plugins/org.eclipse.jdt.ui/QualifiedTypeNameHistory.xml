@@ -10,4 +10,7 @@
     <fullyQualifiedTypeName name="java.util.Arrays"/>
     <fullyQualifiedTypeName name="java.util.Map"/>
     <fullyQualifiedTypeName name="java.util.HashMap"/>
+    <fullyQualifiedTypeName name="in.ineuron.model.DatabaseConnector"/>
+    <fullyQualifiedTypeName name="in.ineuron.view.DataView"/>
+    <fullyQualifiedTypeName name="in.ineuron.util.JdbcUtil"/>
 </qualifiedTypeNameHistroy>
