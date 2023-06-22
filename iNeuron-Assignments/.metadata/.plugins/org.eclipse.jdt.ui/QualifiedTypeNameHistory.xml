@@ -7,10 +7,10 @@
     <fullyQualifiedTypeName name="java.lang.String"/>
     <fullyQualifiedTypeName name="removeDuplicateCharacter"/>
     <fullyQualifiedTypeName name="java.lang.StringBuffer"/>
-    <fullyQualifiedTypeName name="java.util.Arrays"/>
     <fullyQualifiedTypeName name="java.util.Map"/>
     <fullyQualifiedTypeName name="java.util.HashMap"/>
     <fullyQualifiedTypeName name="in.ineuron.model.DatabaseConnector"/>
     <fullyQualifiedTypeName name="in.ineuron.view.DataView"/>
     <fullyQualifiedTypeName name="in.ineuron.util.JdbcUtil"/>
+    <fullyQualifiedTypeName name="java.util.Arrays"/>
 </qualifiedTypeNameHistroy>
